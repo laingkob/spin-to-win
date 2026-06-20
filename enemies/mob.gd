@@ -11,7 +11,7 @@ var max_health = 10
 
 signal squashed
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()
 	
 func initialize(start_position: Vector3, player_position: Vector3):

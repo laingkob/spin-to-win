@@ -31,9 +31,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_back"):
 		direction.z -= 1
 	
-	if Input.is_action_pressed("jump"):
-		direction.y += 1
-	
+
 	if Input.is_action_pressed("spin"):
 		rotation_speed += spin_speed
 	
@@ -51,6 +49,7 @@ func _physics_process(delta):
 		
 	if not is_on_floor():
 		target_velocity.y = target_velocity.y - (fall_acceleration * delta)
+	velocity = target_velocity
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		target_velocity.y = jump_impulse
 	
@@ -65,12 +64,12 @@ func _physics_process(delta):
 			else:
 				mob.take_damage(rotation_speed)
 			##Check that we are on top of it
-			#if Vector3.UP.dot(collision.get_normal()) > 0.1:
-				#mob.squash()
-				#target_velocity.y = bounce_impulse
-				#break
+			if Vector3.UP.dot(collision.get_normal()) > 0.1:
+				mob.squash()
+				target_velocity.y = bounce_impulse
+				break
 
-	velocity = target_velocity
+	
 	move_and_slide()
 
 func take_damage(damage_amount):
@@ -82,5 +81,5 @@ func die():
 	hit.emit()
 	queue_free()
 
-func _on_mob_detector_body_entered(body):
+func _on_mob_detector_body_entered(_body):
 	take_damage(1)

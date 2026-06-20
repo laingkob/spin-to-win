@@ -5,9 +5,6 @@ extends Node3D
 func _ready():
 	$UserInterface/Retry.hide()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 
 func _on_mob_spawn_timer_timeout():
