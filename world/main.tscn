@@ -58,7 +58,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 22, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 keep_aspect = 0
 fov = 81.8
 near = 0.037
@@ -147,9 +146,6 @@ max_value = 20.0
 step = 1.0
 fill_mode = 1
 show_percentage = false
-
-[node name="Mob" parent="." instance=ExtResource("2_dydw2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_spawn_timer_timeout"]
