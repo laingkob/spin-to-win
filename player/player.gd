@@ -19,7 +19,6 @@ signal hit
 var target_velocity = Vector3.ZERO
 var rotation_speed = 0
 
-
 func _physics_process(delta):
 	var direction = Vector3.ZERO
 	
