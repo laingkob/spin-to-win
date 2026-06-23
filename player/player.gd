@@ -12,9 +12,12 @@ extends CharacterBody3D
 
 @export var bounce_impulse = 16
 
-@export var health_bar = 20
+@export var health_bar = 200
+
+var mass = 4
 
 signal hit
+signal died
 
 var target_velocity = Vector3.ZERO
 var rotation_speed = 0
@@ -30,9 +33,6 @@ func _physics_process(delta):
 		direction.z += 1
 	if Input.is_action_pressed("move_back"):
 		direction.z -= 1
-	
-	if Input.is_action_pressed("jump"):
-		direction.y += 1
 	
 	if Input.is_action_pressed("spin"):
 		rotation_speed += spin_speed
@@ -74,13 +74,23 @@ func _physics_process(delta):
 	move_and_slide()
 
 func take_damage(damage_amount):
-	health_bar -= damage_amount
+	print_debug("Player took %d damage" % damage_amount)
+	health_bar -= damage_amount 
+	hit.emit()
 	if health_bar <= 0:
 		die()
 
+func bounce_off(mob):
+	var nx = mob.velocity.y*velocity.z - mob.velocity.z*velocity.y
+	var ny = mob.velocity.z*velocity.x - mob.velocity.x*velocity.z
+	var nz = mob.velocity.x*velocity.y - mob.velocity.y*velocity.x
+	var normal = Vector3(nx, ny, nz)
+	velocity = normal
+	# TODO need to double check how to re scale this vector if necessary
+
 func die():
-	hit.emit()
+	died.emit()
 	queue_free()
 
-func _on_mob_detector_body_entered(body):
+func _on_mob_detector_body_entered(_body):
 	take_damage(1)

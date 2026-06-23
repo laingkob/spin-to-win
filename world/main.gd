@@ -4,9 +4,11 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$UserInterface/Retry.hide()
+	$Player.hit.connect($UserInterface/PlayerHealth._on_player_hit.bind())
+	$Player.died.connect(_on_player_died.bind())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
@@ -23,11 +25,10 @@ func _on_mob_spawn_timer_timeout():
 	mob.squashed.connect($UserInterface/ScoreLabel._on_mob_squashed.bind())
 
 
-func _on_player_hit():
+func _on_player_died():
 	$MobTimer.stop()
 	$UserInterface/Retry.show()
 
 func _unhandled_input(event):
 	if (event.is_action_pressed("ui_accept")) and $UserInterface/Retry.visible:
 		get_tree().reload_current_scene()
-		
