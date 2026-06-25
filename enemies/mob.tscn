@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dhrhk2k0u0ng8"]
 
 [ext_resource type="Script" uid="uid://csjekt8pecnit" path="res://enemies/mob.gd" id="1_fjcxs"]
-[ext_resource type="PackedScene" uid="uid://brg1pmpxmykyc" path="res://beyblade.tscn" id="2_m3fjm"]
+[ext_resource type="PackedScene" uid="uid://bicorb7we351t" path="res://assets/mob.glb" id="2_2ck46"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hgucc"]
 size = Vector3(2.2, 0.8, 3)
@@ -10,44 +10,46 @@ size = Vector3(2.2, 0.8, 3)
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oha0j"]
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj7fc"]
-bg_color = Color(0, 0.6, 0.6, 1)
+bg_color = Color(0.01999998, 0.6, 0, 1)
 
-[node name="Mob" type="CharacterBody3D" unique_id=715681203 groups=["mob"]]
+[node name="Mob" type="CharacterBody3D" unique_id=934339240 groups=["mob"]]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_fjcxs")
 health_bar = 10
 
-[node name="Pivot" type="Node3D" parent="." unique_id=1997645287]
+[node name="Pivot" type="Node3D" parent="." unique_id=1260192274]
 
-[node name="beyblade2" parent="Pivot" unique_id=1885793143 instance=ExtResource("2_m3fjm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+[node name="mob" parent="Pivot" unique_id=1851412141 instance=ExtResource("2_2ck46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00841093, 0.0800879, -0.0089314)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=839663575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=175542416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.25)
 shape = SubResource("BoxShape3D_hgucc")
 
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=1213486936]
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=373594999]
 aabb = AABB(-0.579785, -0.551465, -0.504896, 1.1, 1.1, 1.043)
 
-[node name="HealthBar" type="Sprite3D" parent="." unique_id=987472976]
+[node name="HealthBar" type="Sprite3D" parent="." unique_id=1852885744]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00239396, 1.3106, 0.0938332)
 billboard = 1
 texture = SubResource("ViewportTexture_8lk34")
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=1556810088]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=369321751]
 transparent_bg = true
-size = Vector2i(100, 40)
+size = Vector2i(140, 20)
 
-[node name="ProgressBar" type="ProgressBar" parent="SubViewport" unique_id=1257750098]
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport" unique_id=1606593323]
 offset_right = 140.0
 offset_bottom = 20.0
 theme_override_styles/background = SubResource("StyleBoxFlat_oha0j")
 theme_override_styles/fill = SubResource("StyleBoxFlat_vj7fc")
+max_value = 10.0
 step = 1.0
-value = 50.0
+value = 10.0
 show_percentage = false
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

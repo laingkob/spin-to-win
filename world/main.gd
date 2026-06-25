@@ -9,6 +9,12 @@ func _ready():
 	$UserInterface/Retry.hide()
 	$UserInterface/Victory.hide()
 
+	$Player.hit.connect($UserInterface/PlayerHealth._on_player_hit.bind())
+	$Player.died.connect(_on_player_died.bind())
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	pass
 
 
 func _on_mob_spawn_timer_timeout():
@@ -34,7 +40,7 @@ func _on_mob_gone():
 	if(mob_count<=0):
 		victory()
 
-func _on_player_hit():
+func _on_player_died():
 	$MobTimer.stop()
 	$UserInterface/Retry.show()
 	
@@ -44,4 +50,3 @@ func victory():
 func _unhandled_input(event):
 	if (event.is_action_pressed("ui_accept")) and $UserInterface/Retry.visible || $UserInterface/Victory.visible:
 		get_tree().reload_current_scene()
-		
