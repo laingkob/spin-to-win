@@ -7,8 +7,12 @@ extends CharacterBody3D
 @export var rotation_speed = 2
 
 signal squashed
+signal left 
 
-func _physics_process(delta):
+func _physics_process(_delta):
+	if is_on_wall():
+		initialize(position,get_wall_normal())
+	
 	move_and_slide()
 	
 func initialize(start_position: Vector3, player_position: Vector3):
@@ -27,6 +31,7 @@ func take_damage(damage_amount):
 		squash()
 
 func _on_visible_on_screen_notifier_3d_screen_exited():
+	left.emit()
 	queue_free()
 
 func squash():

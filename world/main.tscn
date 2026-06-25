@@ -3,13 +3,25 @@
 [ext_resource type="Script" uid="uid://dq4uirrju3f4l" path="res://world/main.gd" id="1_ljbto"]
 [ext_resource type="PackedScene" uid="uid://dhrhk2k0u0ng8" path="res://enemies/mob.tscn" id="2_dydw2"]
 [ext_resource type="PackedScene" uid="uid://bmc2ik27wu5wn" path="res://player/player.tscn" id="3_fdpsk"]
+[ext_resource type="Material" uid="uid://14oiwitlwllr" path="res://assets/eye.tres" id="3_i1eo7"]
 [ext_resource type="Script" uid="uid://c5xwfgsshriqc" path="res://world/score.gd" id="4_6mw2r"]
 [ext_resource type="Script" uid="uid://cra5ot0d8qa75" path="res://world/player_health.gd" id="5_cmo1i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cmo1i"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cmo1i"]
+material = SubResource("StandardMaterial3D_cmo1i")
+size = Vector3(50, 10, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i1eo7"]
+size = Vector3(50, 10, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pb4r1"]
 size = Vector3(60, 2, 60)
 
 [sub_resource type="BoxMesh" id="BoxMesh_li0jx"]
+material = ExtResource("3_i1eo7")
 size = Vector3(60, 2, 60)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwth6"]
@@ -44,6 +56,57 @@ mob_scene = ExtResource("2_dydw2")
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 9, 1)
 shadow_enabled = true
 
+[node name="Walls" type="Node3D" parent="." unique_id=1719707235]
+visible = false
+
+[node name="Top" type="StaticBody3D" parent="Walls" unique_id=1747557376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1428223, -17.6)
+collision_layer = 4
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Top" unique_id=347613511]
+mesh = SubResource("BoxMesh_cmo1i")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Top" unique_id=1504128384]
+shape = SubResource("BoxShape3D_i1eo7")
+
+[node name="Bottom" type="StaticBody3D" parent="Walls" unique_id=1660178230]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1428223, 19.4)
+collision_layer = 4
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Bottom" unique_id=2105119172]
+mesh = SubResource("BoxMesh_cmo1i")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Bottom" unique_id=1928507022]
+shape = SubResource("BoxShape3D_i1eo7")
+
+[node name="Left" type="StaticBody3D" parent="Walls" unique_id=246236782]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -25, 5.1428223, 0.39999962)
+collision_layer = 4
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Left" unique_id=1753320461]
+mesh = SubResource("BoxMesh_cmo1i")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Left" unique_id=1501101510]
+shape = SubResource("BoxShape3D_i1eo7")
+
+[node name="Right" type="StaticBody3D" parent="Walls" unique_id=454592677]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25, 5.1428223, 1.3999996)
+collision_layer = 4
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Right" unique_id=1042193402]
+mesh = SubResource("BoxMesh_cmo1i")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Right" unique_id=1521062200]
+shape = SubResource("BoxShape3D_i1eo7")
+
 [node name="Ground" type="StaticBody3D" parent="." unique_id=753842521]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 collision_layer = 4
@@ -62,7 +125,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 22, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=783025534]
-keep_aspect = 0
 fov = 81.8
 near = 0.037
 
@@ -89,7 +151,7 @@ mesh = SubResource("CylinderMesh_jp6ov")
 curve = SubResource("Curve3D_leqef")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath" unique_id=80408842]
-transform = Transform3D(0.006771807, 0, 0.9999742, 0, 1, 0, -0.9999742, 0, 0.006771807, 21.0188, 0, 5.05841)
+transform = Transform3D(0.006771804, 0, 0.9999737, 0, 1, 0, -0.9999737, 0, 0.006771804, 21.0188, 0, 5.05841)
 
 [node name="MobTimer" type="Timer" parent="." unique_id=430251934]
 wait_time = 0.5
@@ -137,6 +199,31 @@ offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Press Enter to retry"
+
+[node name="Victory" type="ColorRect" parent="UserInterface" unique_id=1767694305]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.47843137, 0.8235294, 0.14117648, 0.5019608)
+
+[node name="Label" type="Label" parent="UserInterface/Victory" unique_id=1252117967]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.5
+offset_top = -15.5
+offset_right = 103.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "You Won!
+Press Enter to retry"
 
 [node name="PlayerHealth" type="ProgressBar" parent="UserInterface" unique_id=1346198594]
 material = SubResource("CanvasItemMaterial_g0e3n")
