@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://18kqi4lkwo1b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_spvjk"]
+size = Vector3(50, 10, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_spvjk"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cmo1i"]
+material = SubResource("StandardMaterial3D_spvjk")
+size = Vector3(50, 10, 3)
+
+[node name="Walls" type="Node3D" unique_id=872891863]
+visible = false
+
+[node name="Top" type="StaticBody3D" parent="." unique_id=673025450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8519106, -17.810513)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Top" unique_id=128958889]
+shape = SubResource("BoxShape3D_spvjk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Top" unique_id=846935414]
+mesh = SubResource("BoxMesh_cmo1i")
+
+[node name="Bottom" type="StaticBody3D" parent="." unique_id=1008247488]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8519106, 18.189487)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bottom" unique_id=1718151960]
+shape = SubResource("BoxShape3D_spvjk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Bottom" unique_id=1073285847]
+gi_mode = 0
+mesh = SubResource("BoxMesh_cmo1i")
+
+[node name="Left" type="StaticBody3D" parent="." unique_id=1300905199]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -23, 1.8519106, 1.1894875)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Left" unique_id=369760957]
+shape = SubResource("BoxShape3D_spvjk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Left" unique_id=1646809065]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1920929e-07, 0, 2)
+mesh = SubResource("BoxMesh_cmo1i")
+
+[node name="Right" type="StaticBody3D" parent="." unique_id=644814437]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 24, 1.8519106, 1.1894875)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Right" unique_id=865722182]
+shape = SubResource("BoxShape3D_spvjk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Right" unique_id=178929713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = SubResource("BoxMesh_cmo1i")

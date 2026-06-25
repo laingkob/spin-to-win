@@ -5,16 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://bmc2ik27wu5wn" path="res://player/player.tscn" id="3_fdpsk"]
 [ext_resource type="Script" uid="uid://c5xwfgsshriqc" path="res://world/score.gd" id="4_6mw2r"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_spvjk"]
-size = Vector3(50, 10, 3)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_spvjk"]
-albedo_color = Color(0, 1, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_cmo1i"]
-material = SubResource("StandardMaterial3D_spvjk")
-size = Vector3(50, 10, 3)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_pb4r1"]
 size = Vector3(60, 2, 60)
 
@@ -49,56 +39,6 @@ mob_scene = ExtResource("2_dydw2")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=662273686]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 9, 1)
 shadow_enabled = true
-
-[node name="Walls" type="Node3D" parent="." unique_id=249253785]
-visible = false
-
-[node name="Top" type="StaticBody3D" parent="Walls" unique_id=1855419012]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8519106, -17.810513)
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Top" unique_id=249244749]
-shape = SubResource("BoxShape3D_spvjk")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Top" unique_id=1183218886]
-mesh = SubResource("BoxMesh_cmo1i")
-
-[node name="Bottom" type="StaticBody3D" parent="Walls" unique_id=1689962632]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8519106, 18.189487)
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Bottom" unique_id=1279492098]
-shape = SubResource("BoxShape3D_spvjk")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Bottom" unique_id=727737809]
-gi_mode = 0
-mesh = SubResource("BoxMesh_cmo1i")
-
-[node name="Left" type="StaticBody3D" parent="Walls" unique_id=1777766213]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -23, 1.8519106, 1.1894875)
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Left" unique_id=29825245]
-shape = SubResource("BoxShape3D_spvjk")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Left" unique_id=981833563]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1920929e-07, 0, 2)
-mesh = SubResource("BoxMesh_cmo1i")
-
-[node name="Right" type="StaticBody3D" parent="Walls" unique_id=1236626940]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 24, 1.8519106, 1.1894875)
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Right" unique_id=2115661872]
-shape = SubResource("BoxShape3D_spvjk")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Walls/Right" unique_id=403957345]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-mesh = SubResource("BoxMesh_cmo1i")
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=1777165915]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -144,7 +84,7 @@ mesh = SubResource("CylinderMesh_jp6ov")
 curve = SubResource("Curve3D_leqef")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath" unique_id=617908837]
-transform = Transform3D(0.0067718, 0, 0.9999731, 0, 1, 0, -0.9999731, 0, 0.0067718, 21.0188, 0, 5.05841)
+transform = Transform3D(0.0067717996, 0, 0.99997306, 0, 1, 0, -0.99997306, 0, 0.0067717996, 21.0188, 0, 5.05841)
 
 [node name="MobTimer" type="Timer" parent="." unique_id=346400684]
 wait_time = 0.5
@@ -192,31 +132,6 @@ offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Press Enter to retry"
-
-[node name="Victory" type="ColorRect" parent="UserInterface" unique_id=688576751]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.45642316, 0.8702035, 0.56684715, 0.5019608)
-
-[node name="Label" type="Label" parent="UserInterface/Victory" unique_id=1236419011]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -103.5
-offset_top = -15.5
-offset_right = 103.5
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "You've Won! 
-Press Enter to Play Again"
 
 [node name="ProgressBar" type="ProgressBar" parent="UserInterface" unique_id=695770424]
 material = SubResource("CanvasItemMaterial_g0e3n")
