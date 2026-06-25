@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bmc2ik27wu5wn"]
 
 [ext_resource type="Script" uid="uid://xtc163ypgxav" path="res://player/player.gd" id="1_iv7fx"]
+[ext_resource type="PackedScene" uid="uid://bf76p2op5q2e5" path="res://assets/beyblade.blend" id="2_g1dw6"]
 [ext_resource type="PackedScene" uid="uid://d0ypm0v45pwdv" path="res://assets/player.glb" id="2_x6vfr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tqt43"]
@@ -16,7 +17,10 @@ script = ExtResource("1_iv7fx")
 
 [node name="Pivot" type="Node3D" parent="." unique_id=1130069697]
 
+[node name="beyblade" parent="Pivot" unique_id=1719102423 instance=ExtResource("2_g1dw6")]
+
 [node name="Sprite" parent="Pivot" unique_id=2084810101 instance=ExtResource("2_x6vfr")]
+visible = false
 
 [node name="Character" type="CollisionShape3D" parent="." unique_id=295076552]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

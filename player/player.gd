@@ -46,7 +46,7 @@ func _physics_process(delta):
 	
 	if rotation_speed != 0:
 		var rotation_amount = 0.1 * rotation_speed
-		$Pivot/Sprite.rotate(Vector3(0, 1, 0), rotation_amount)
+		$Pivot/beyblade.rotate(Vector3(0, 1, 0), rotation_amount)
 		rotation_speed -= 1
 		
 	if not is_on_floor():
