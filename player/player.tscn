@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmc2ik27wu5wn"]
 
 [ext_resource type="Script" uid="uid://xtc163ypgxav" path="res://player/player.gd" id="1_iv7fx"]
-[ext_resource type="PackedScene" uid="uid://d0ypm0v45pwdv" path="res://assets/player.glb" id="2_x6vfr"]
+[ext_resource type="PackedScene" uid="uid://bf76p2op5q2e5" path="res://assets/beyblade.blend" id="3_g1dw6"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tqt43"]
 radius = 0.4
@@ -11,13 +11,18 @@ height = 0.2
 radius = 1.1
 
 [node name="Player" type="CharacterBody3D" unique_id=1857528939]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
 collision_mask = 7
+wall_min_slide_angle = 0.0
+floor_stop_on_slope = false
 script = ExtResource("1_iv7fx")
+wall_bounce_factor = 12.0
 
 [node name="Pivot" type="Node3D" parent="." unique_id=1891029512]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36313057, 0)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0.36313054, 0)
 
-[node name="Sprite" parent="Pivot" unique_id=1214957632 instance=ExtResource("2_x6vfr")]
+[node name="beyblade" parent="Pivot" unique_id=1463852136 instance=ExtResource("3_g1dw6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="Character" type="CollisionShape3D" parent="." unique_id=1488505409]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -30,7 +35,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MobDetector" unique_id=1022466280]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174968, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.99999994, 0)
 shape = SubResource("CylinderShape3D_xf6sg")
 
 [connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]

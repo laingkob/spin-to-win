@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://brg1pmpxmykyc"]
+
+[ext_resource type="PackedScene" uid="uid://bf76p2op5q2e5" path="res://assets/beyblade.blend" id="1_e03yv"]
+[ext_resource type="Material" path="res://assets/pupil.tres" id="2_qg5uo"]
+
+[node name="beyblade" unique_id=1885793143 instance=ExtResource("1_e03yv")]
+
+[node name="Cone" parent="." index="0" unique_id=2101149614]
+surface_material_override/1 = ExtResource("2_qg5uo")

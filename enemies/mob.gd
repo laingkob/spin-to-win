@@ -10,8 +10,11 @@ var max_health = 10
 @export var health_bar = max_health
 
 signal squashed
-
+signal left 
 func _physics_process(_delta):
+	if is_on_wall():
+		velocity = get_wall_normal()
+		
 	move_and_slide()
 	
 func initialize(start_position: Vector3, player_position: Vector3):
@@ -31,6 +34,7 @@ func take_damage(damage_amount):
 		squash()
 
 func _on_visible_on_screen_notifier_3d_screen_exited():
+	left.emit()
 	queue_free()
 
 func squash():
