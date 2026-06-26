@@ -73,7 +73,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func take_damage(damage_amount):
-	print_debug("Player took %d damage" % damage_amount)
+	#print_debug("Player took %d damage" % damage_amount)
 	health_bar -= damage_amount 
 	hit.emit()
 	if health_bar <= 0:

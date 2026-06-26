@@ -4,13 +4,14 @@ extends Node3D
 @export var mob_limit : int = 3
 var mob_count : int = 0 
 var mob_killed : int = 0 
+signal shake
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$UserInterface/Retry.hide()
 	$UserInterface/Victory.hide() 
 	$Player.hit.connect($UserInterface/PlayerHealth._on_player_hit.bind())
 	$Player.died.connect(_on_player_died.bind())
-
+	shake.connect($CameraPivot/Camera3D._shake_camera.bind())
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
@@ -35,6 +36,8 @@ func _on_mob_spawn_timer_timeout():
 		$MobTimer.stop()
 		
 func _on_mob_gone():
+	$SFX.play()
+	shake.emit(2,1,300)
 	mob_killed+=1
 	if(mob_killed>=mob_limit):
 		$MobTimer.stop()

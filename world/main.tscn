@@ -6,6 +6,11 @@
 [ext_resource type="Material" uid="uid://14oiwitlwllr" path="res://assets/eye.tres" id="3_i1eo7"]
 [ext_resource type="Script" uid="uid://c5xwfgsshriqc" path="res://world/score.gd" id="4_6mw2r"]
 [ext_resource type="Script" uid="uid://cra5ot0d8qa75" path="res://world/player_health.gd" id="5_cmo1i"]
+[ext_resource type="Script" uid="uid://cfvltffb6u57e" path="res://world/camera_3d.gd" id="5_vrojb"]
+[ext_resource type="AudioStream" uid="uid://c1y4bkrfexo8o" path="res://assets/boing_4.ogg" id="7_04q08"]
+[ext_resource type="AudioStream" uid="uid://yat4tvwpnj7y" path="res://assets/bonk_4.ogg" id="8_vrojb"]
+[ext_resource type="AudioStream" uid="uid://c1y25gf6rdtky" path="res://assets/bonk_5.ogg" id="10_op3e8"]
+[ext_resource type="AudioStream" uid="uid://8ku7ppufi0xj" path="res://assets/bonk_6.ogg" id="11_vid1e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cmo1i"]
 albedo_color = Color(1, 0, 1, 1)
@@ -18,11 +23,17 @@ size = Vector3(50, 10, 3)
 size = Vector3(50, 10, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pb4r1"]
-size = Vector3(60, 2, 60)
+size = Vector3(100, 2, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_li0jx"]
 material = ExtResource("3_i1eo7")
-size = Vector3(60, 2, 60)
+size = Vector3(100, 2, 100)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vrojb"]
+frequency = 0.0439
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qnd6n"]
+noise = SubResource("FastNoiseLite_vrojb")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwth6"]
 albedo_color = Color(0.866667, 0.305882, 0.729412, 0.698039)
@@ -47,6 +58,13 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gu74f"]
 bg_color = Color(0.01999998, 0.6, 0, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qnd6n"]
+streams_count = 4
+stream_0/stream = ExtResource("7_04q08")
+stream_1/stream = ExtResource("8_vrojb")
+stream_2/stream = ExtResource("10_op3e8")
+stream_3/stream = ExtResource("11_vid1e")
 
 [node name="Main" type="Node3D" unique_id=263054531]
 script = ExtResource("1_ljbto")
@@ -127,6 +145,8 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 22,
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=783025534]
 fov = 81.8
 near = 0.037
+script = ExtResource("5_vrojb")
+noise = SubResource("NoiseTexture2D_qnd6n")
 
 [node name="Cylinders" type="Node3D" parent="." unique_id=34284294]
 visible = false
@@ -151,7 +171,7 @@ mesh = SubResource("CylinderMesh_jp6ov")
 curve = SubResource("Curve3D_leqef")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath" unique_id=80408842]
-transform = Transform3D(0.0067717917, 0, 0.9999719, 0, 1, 0, -0.9999719, 0, 0.0067717917, 21.0188, 0, 5.05841)
+transform = Transform3D(0.0067717894, 0, 0.99997157, 0, 1, 0, -0.99997157, 0, 0.0067717894, 21.0188, 0, 5.05841)
 
 [node name="MobTimer" type="Timer" parent="." unique_id=430251934]
 wait_time = 0.5
@@ -240,6 +260,9 @@ value = 200.0
 fill_mode = 1
 show_percentage = false
 script = ExtResource("5_cmo1i")
+
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=765363225]
+stream = SubResource("AudioStreamRandomizer_qnd6n")
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_spawn_timer_timeout"]

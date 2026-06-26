@@ -8,6 +8,7 @@ extends CharacterBody3D
 var is_rotating : bool = true
 signal squashed
 signal left 
+var dead = false
 
 func _physics_process(_delta):
 	if is_on_wall():
@@ -29,13 +30,15 @@ func initialize(start_position: Vector3, player_position: Vector3):
 func take_damage(damage_amount):
 	$HealthBar.visible = true
 	$SubViewport/ProgressBar.value -= damage_amount
-	if $SubViewport/ProgressBar.value <= 0:
+	if $SubViewport/ProgressBar.value <= 0 && dead==false:
+		dead = true
 		squash()
 
-func _on_visible_on_screen_notifier_3d_screen_exited():
-	left.emit()
-	queue_free()
+#func _on_visible_on_screen_notifier_3d_screen_exited():
+	#left.emit()
+	#queue_free()
 
 func squash():
 	squashed.emit()
+
 	queue_free()
