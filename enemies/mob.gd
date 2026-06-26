@@ -9,7 +9,7 @@ var is_rotating : bool = true
 signal squashed
 signal left 
 var dead = false
-
+signal collide
 func _physics_process(_delta):
 	if is_on_wall():
 		initialize(position,get_wall_normal())
@@ -24,16 +24,19 @@ func initialize(start_position: Vector3, player_position: Vector3):
 	var random_speed = randi_range(min_speed, max_speed)
 	velocity = Vector3.FORWARD * random_speed
 	velocity = velocity.rotated(Vector3.UP, rotation.y)
-	
+
 	
 
 func take_damage(damage_amount):
+	collide.emit()
 	$HealthBar.visible = true
 	$SubViewport/ProgressBar.value -= damage_amount
 	if $SubViewport/ProgressBar.value <= 0 && dead==false:
 		$Pivot/beyblade2/AnimationPlayer.play("death")
 		dead = true
 		#squash()
+
+		
 
 #func _on_visible_on_screen_notifier_3d_screen_exited():
 	#left.emit()

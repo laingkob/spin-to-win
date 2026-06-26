@@ -123,7 +123,6 @@ aabb = AABB(-0.579785, -0.551465, -0.504896, 1.1, 1.1, 1.043)
 
 [node name="HealthBar" type="Sprite3D" parent="." unique_id=1852885744]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00239396, 2.6106, 0.0938332)
-visible = false
 billboard = 1
 texture = SubResource("ViewportTexture_8lk34")
 

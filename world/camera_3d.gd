@@ -39,6 +39,6 @@ func _shake_amounts(amount:float,duration:float,_speed:float):
 		
 func _shake_camera(amount:float,duration:float,_speed:float):	
 	_shake_amounts(amount,duration,_speed)	
-	print("heard")
+
 		
 		

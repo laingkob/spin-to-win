@@ -30,20 +30,22 @@ func _on_mob_spawn_timer_timeout():
 		
 		mob.squashed.connect($UserInterface/ScoreLabel._on_mob_squashed.bind())
 		mob.squashed.connect(_on_mob_gone.bind())
+		mob.collide.connect(_collision.bind())
 		#mob.left.connect(_on_mob_gone.bind())
 		mob_count+=1
 	else:
 		$MobTimer.stop()
 		
 func _on_mob_gone():
-	$SFX.play()
-	shake.emit(2,1,300)
 	mob_killed+=1
 	if(mob_killed>=mob_limit):
 		$MobTimer.stop()
 		victory()
 	
-
+func _collision():
+	$SFX.play()
+	shake.emit(1.5,1,200)
+	
 func _on_player_died():
 	$MobTimer.stop()
 	$UserInterface/Retry.show()
