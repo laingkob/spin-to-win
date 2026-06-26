@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cebkp4wlian0r"]
+[gd_scene format=3 uid="uid://cebkp4wlian0r"]
 
-[ext_resource type="AudioStream" uid="uid://c61brcw6ttexj" path="res://assets/House In a Forest Loop.ogg" id="1_xl4ob"]
+[ext_resource type="AudioStream" uid="uid://c68v66pum2odv" path="res://assets/Three Red Hearts - Box Jump.ogg" id="1_os4co"]
 
-[node name="MusicPlayer" type="AudioStreamPlayer3D"]
-stream = ExtResource("1_xl4ob")
+[node name="MusicPlayer" type="AudioStreamPlayer3D" unique_id=552755430]
+stream = ExtResource("1_os4co")
 autoplay = true

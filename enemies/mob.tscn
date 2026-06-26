@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dhrhk2k0u0ng8"]
 
 [ext_resource type="Script" uid="uid://csjekt8pecnit" path="res://enemies/mob.gd" id="1_fjcxs"]
-[ext_resource type="PackedScene" uid="uid://bicorb7we351t" path="res://assets/mob.glb" id="2_2ck46"]
 [ext_resource type="PackedScene" uid="uid://brg1pmpxmykyc" path="res://assets/beyblade.tscn" id="2_qftf6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hgucc"]
@@ -23,11 +22,7 @@ script = ExtResource("1_fjcxs")
 
 [node name="Pivot" type="Node3D" parent="." unique_id=1260192274]
 
-[node name="beyblade2" parent="Pivot" unique_id=1719102423 instance=ExtResource("2_qftf6")]
-
-[node name="mob" parent="Pivot" unique_id=1851412141 instance=ExtResource("2_2ck46")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00841093, 0.0800879, -0.0089314)
-visible = false
+[node name="beyblade2" parent="Pivot" unique_id=223040962 instance=ExtResource("2_qftf6")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=175542416]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.25)
@@ -38,6 +33,7 @@ aabb = AABB(-0.579785, -0.551465, -0.504896, 1.1, 1.1, 1.043)
 
 [node name="HealthBar" type="Sprite3D" parent="." unique_id=1852885744]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00239396, 2.6106, 0.0938332)
+visible = false
 billboard = 1
 texture = SubResource("ViewportTexture_8lk34")
 

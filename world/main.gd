@@ -3,6 +3,7 @@ extends Node3D
 @export var mob_scene: PackedScene
 @export var mob_limit : int = 3
 var mob_count : int = 0 
+var mob_killed : int = 0 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$UserInterface/Retry.hide()
@@ -34,18 +35,20 @@ func _on_mob_spawn_timer_timeout():
 		$MobTimer.stop()
 		
 func _on_mob_gone():
-	mob_count-=1
-	if(mob_count<=0):
+	mob_killed+=1
+	if(mob_killed>=mob_limit):
+		$MobTimer.stop()
 		victory()
-
+	
 
 func _on_player_died():
 	$MobTimer.stop()
 	$UserInterface/Retry.show()
-
+  
 func victory():
+	
 	$UserInterface/Victory.show()
 		 
 func _unhandled_input(event):
-	if (event.is_action_pressed("ui_accept")) and ($UserInterface/Retry.visible or $UserInterface/Victory.visible):
+	if (event.is_action_pressed("enter")) and ($UserInterface/Retry.visible or $UserInterface/Victory.visible):
 		get_tree().reload_current_scene()

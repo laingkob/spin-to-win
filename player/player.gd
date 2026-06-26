@@ -51,8 +51,7 @@ func _physics_process(delta):
 		
 	if not is_on_floor():
 		target_velocity.y = target_velocity.y - (fall_acceleration * delta)
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
-		target_velocity.y = jump_impulse
+
 	
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
