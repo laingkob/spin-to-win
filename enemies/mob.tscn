@@ -3,6 +3,91 @@
 [ext_resource type="Script" uid="uid://csjekt8pecnit" path="res://enemies/mob.gd" id="1_fjcxs"]
 [ext_resource type="PackedScene" uid="uid://brg1pmpxmykyc" path="res://assets/beyblade.tscn" id="2_qftf6"]
 
+[sub_resource type="Animation" id="Animation_m3fjm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("beyblade2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("beyblade2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("beyblade2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 0.9999997, 0.9999997)]
+}
+
+[sub_resource type="Animation" id="Animation_qftf6"]
+resource_name = "death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("beyblade2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("beyblade2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.033333335, 1.9666667),
+"transitions": PackedFloat32Array(1.6817936, 1.6817936),
+"update": 0,
+"values": [Vector3(0, -6.2831855, 0), Vector3(-0.6614798, 6.2831855, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("beyblade2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.3666667, 2),
+"transitions": PackedFloat32Array(0.81225246, 0.81225246),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gceo1"]
+_data = {
+&"RESET": SubResource("Animation_m3fjm"),
+&"death": SubResource("Animation_qftf6")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_hgucc"]
 size = Vector3(2.2, 0.8, 3)
 
@@ -23,6 +108,11 @@ script = ExtResource("1_fjcxs")
 [node name="Pivot" type="Node3D" parent="." unique_id=1260192274]
 
 [node name="beyblade2" parent="Pivot" unique_id=223040962 instance=ExtResource("2_qftf6")]
+transform = Transform3D(1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot/beyblade2" unique_id=1016091953]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_gceo1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=175542416]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.25)
@@ -51,4 +141,5 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
+[connection signal="animation_finished" from="Pivot/beyblade2/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

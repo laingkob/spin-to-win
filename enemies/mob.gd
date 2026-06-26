@@ -31,8 +31,9 @@ func take_damage(damage_amount):
 	$HealthBar.visible = true
 	$SubViewport/ProgressBar.value -= damage_amount
 	if $SubViewport/ProgressBar.value <= 0 && dead==false:
+		$Pivot/beyblade2/AnimationPlayer.play("death")
 		dead = true
-		squash()
+		#squash()
 
 #func _on_visible_on_screen_notifier_3d_screen_exited():
 	#left.emit()
@@ -42,3 +43,8 @@ func squash():
 	squashed.emit()
 
 	queue_free()
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "death":
+		squash()
