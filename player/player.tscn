@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xtc163ypgxav" path="res://player/player.gd" id="1_iv7fx"]
 [ext_resource type="PackedScene" uid="uid://bf76p2op5q2e5" path="res://assets/beyblade.blend" id="2_g1dw6"]
+[ext_resource type="PackedScene" uid="uid://c31spmus25262" path="res://player/damaged_beyblade.tscn" id="3_g1dw6"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tqt43"]
 radius = 0.4
@@ -18,6 +19,16 @@ script = ExtResource("1_iv7fx")
 
 [node name="beyblade" parent="Pivot" unique_id=978707234 instance=ExtResource("2_g1dw6")]
 
+[node name="damaged_beyblade" parent="Pivot" unique_id=2009153742 instance=ExtResource("3_g1dw6")]
+visible = false
+
+[node name="DamageBlinkTimer" type="Timer" parent="Pivot" unique_id=1116327227]
+process_callback = 0
+wait_time = 0.4
+
+[node name="BlinkIntervalTimer" type="Timer" parent="Pivot" unique_id=1709200490]
+wait_time = 0.1
+
 [node name="Character" type="CollisionShape3D" parent="." unique_id=295076552]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("SphereShape3D_tqt43")
@@ -32,4 +43,6 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174968, 0)
 shape = SubResource("CylinderShape3D_xf6sg")
 
+[connection signal="timeout" from="Pivot/DamageBlinkTimer" to="." method="_on_damage_blink_timer_timeout"]
+[connection signal="timeout" from="Pivot/BlinkIntervalTimer" to="." method="_on_blink_interval_timer_timeout"]
 [connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c31spmus25262"]
+
+[ext_resource type="PackedScene" uid="uid://bf76p2op5q2e5" path="res://assets/beyblade.blend" id="1_sdot0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ai17g"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.627451)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1exw"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.627451)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7coj"]
+albedo_color = Color(1, 0, 0, 0.627451)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wp03k"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.627451)
+
+[node name="beyblade" unique_id=2009153742 instance=ExtResource("1_sdot0")]
+
+[node name="Cone" parent="." index="0" unique_id=1397262163]
+surface_material_override/0 = SubResource("StandardMaterial3D_ai17g")
+surface_material_override/1 = SubResource("StandardMaterial3D_j1exw")
+
+[node name="Cone_001" parent="." index="1" unique_id=182513522]
+surface_material_override/0 = SubResource("StandardMaterial3D_n7coj")
+surface_material_override/1 = SubResource("StandardMaterial3D_wp03k")

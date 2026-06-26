@@ -14,6 +14,8 @@ extends CharacterBody3D
 
 @export var health_bar = 200
 
+var temporary_invincibility = false
+
 var mass = 4
 
 signal hit
@@ -73,11 +75,16 @@ func _physics_process(delta):
 	move_and_slide()
 
 func take_damage(damage_amount):
-	#print_debug("Player took %d damage" % damage_amount)
-	health_bar -= damage_amount 
-	hit.emit()
-	if health_bar <= 0:
-		die()
+	if not temporary_invincibility:
+		#print_debug("Player took %d damage" % damage_amount)
+		health_bar -= damage_amount 
+
+		$Pivot/DamageBlinkTimer.start()
+		$Pivot/BlinkIntervalTimer.start()
+		temporary_invincibility = true
+		hit.emit()
+		if health_bar <= 0:
+			die()
 
 func bounce_off(mob):
 	var nx = mob.velocity.y*velocity.z - mob.velocity.z*velocity.y
@@ -93,3 +100,17 @@ func die():
 
 func _on_mob_detector_body_entered(_body):
 	take_damage(1)
+
+func _on_damage_blink_timer_timeout() -> void:
+	$Pivot/BlinkIntervalTimer.stop()
+	temporary_invincibility = false
+	$Pivot/beyblade.show()
+	$Pivot/damaged_beyblade.hide()
+
+func _on_blink_interval_timer_timeout() -> void:
+	if $Pivot/beyblade.visible:
+		$Pivot/beyblade.hide()
+		$Pivot/damaged_beyblade.show()
+	else :
+		$Pivot/beyblade.show()
+		$Pivot/damaged_beyblade.hide()
