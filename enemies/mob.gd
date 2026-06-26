@@ -5,23 +5,25 @@ extends CharacterBody3D
 @export var max_speed: int = 11
 
 @export var rotation_speed = 2
-
+var is_rotating : bool = true
 signal squashed
 signal left 
 
 func _physics_process(_delta):
 	if is_on_wall():
 		initialize(position,get_wall_normal())
-	
+	if is_rotating:
+		rotate_y(randf_range(-PI/4, PI/4))
 	move_and_slide()
 	
 func initialize(start_position: Vector3, player_position: Vector3):
 	look_at_from_position(start_position, player_position, Vector3.UP)
-	rotate_y(randf_range(-PI/4, PI/4))
+	
 	
 	var random_speed = randi_range(min_speed, max_speed)
 	velocity = Vector3.FORWARD * random_speed
 	velocity = velocity.rotated(Vector3.UP, rotation.y)
+	
 	
 
 func take_damage(damage_amount):

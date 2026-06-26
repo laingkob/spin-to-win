@@ -3,7 +3,20 @@
 [ext_resource type="PackedScene" uid="uid://bf76p2op5q2e5" path="res://assets/beyblade.blend" id="1_e03yv"]
 [ext_resource type="Material" path="res://assets/pupil.tres" id="2_qg5uo"]
 
-[node name="beyblade" unique_id=1719102423 instance=ExtResource("1_e03yv")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_evydb"]
+albedo_color = Color(1, 0.21960784, 0.13725491, 1)
+metallic = 0.61
+rim_enabled = true
 
-[node name="Cone" parent="." index="0" unique_id=346885211]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vwc1x"]
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.0
+
+[node name="beyblade" unique_id=978707234 instance=ExtResource("1_e03yv")]
+
+[node name="Cone" parent="." index="0" unique_id=1183022930]
 surface_material_override/1 = ExtResource("2_qg5uo")
+
+[node name="Cone_001" parent="." index="1" unique_id=810582587]
+surface_material_override/0 = SubResource("StandardMaterial3D_evydb")
+surface_material_override/1 = SubResource("StandardMaterial3D_vwc1x")
