@@ -13,6 +13,8 @@ var fall_acceleration = 10
 
 var temporary_invincibility = false
 var lock_controls = false
+var superpower_on = false
+@onready var initial_transform = transform
 
 var mass = 4
 
@@ -24,7 +26,6 @@ var rotation_speed = spin_speed
 
 func _physics_process(delta):
 	if not is_on_floor():
-		print_debug("flying")
 		velocity.y = velocity.y - (fall_acceleration * delta)
 	
 	if lock_controls:
@@ -42,8 +43,11 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_back"):
 		direction.z -= 1
 	
-	if Input.is_action_pressed("spin") && rotation_speed < max_rotation_speed:
-		rotation_speed += spin_speed
+	if not superpower_on and Input.is_action_pressed("spin"):
+		superpower_on = true
+		rotation_speed = max_rotation_speed
+		transform = transform.scaled(Vector3(1.5,1.5,1.5))
+		$SuperpowerTimer.start()
 	
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
@@ -51,13 +55,8 @@ func _physics_process(delta):
 	
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
-	
-	if rotation_speed != 0:
-		var rotation_amount = 0.1 * rotation_speed
-		$Pivot/beyblade.rotate(Vector3(0, 1, 0), rotation_amount)
-		rotation_speed -= 1
-		
-	
+	$AnimationPlayer.speed_scale = rotation_speed/2
+
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		if collision.get_collider() == null:
@@ -120,3 +119,11 @@ func _on_blink_interval_timer_timeout() -> void:
 
 func _on_collision_timer_timeout() -> void:
 	lock_controls = false
+
+
+func _on_superpower_timer_timeout() -> void:
+	var power_down = initial_transform
+	power_down.origin = position
+	transform = power_down
+	superpower_on = false
+	rotation_speed = spin_speed

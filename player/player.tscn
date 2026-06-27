@@ -10,6 +10,121 @@ radius = 0.4
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xf6sg"]
 radius = 1.9
 
+[sub_resource type="Animation" id="Animation_m3fjm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("beyblade:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("beyblade:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("beyblade:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 0.9999997, 0.9999997)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qftf6"]
+resource_name = "death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("beyblade:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("beyblade:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.033333335, 1.9666667),
+"transitions": PackedFloat32Array(1.6817936, 1.6817936),
+"update": 0,
+"values": [Vector3(0, -6.2831855, 0), Vector3(-0.6614798, 6.2831855, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("beyblade:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.3666667, 2),
+"transitions": PackedFloat32Array(0.81225246, 0.81225246),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gceo1"]
+resource_name = "spin"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g1dw6"]
+_data = {
+&"RESET": SubResource("Animation_m3fjm"),
+&"death": SubResource("Animation_qftf6"),
+&"spin": SubResource("Animation_gceo1")
+}
+
 [node name="Player" type="CharacterBody3D" unique_id=523184643]
 collision_mask = 7
 script = ExtResource("1_iv7fx")
@@ -17,6 +132,7 @@ script = ExtResource("1_iv7fx")
 [node name="Pivot" type="Node3D" parent="." unique_id=1130069697]
 
 [node name="beyblade" parent="Pivot" unique_id=978707234 instance=ExtResource("2_g1dw6")]
+transform = Transform3D(1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, 0, 0, 0)
 
 [node name="damaged_beyblade" parent="Pivot" unique_id=2009153742 instance=ExtResource("3_g1dw6")]
 visible = false
@@ -45,7 +161,17 @@ shape = SubResource("CylinderShape3D_xf6sg")
 [node name="CollisionTimer" type="Timer" parent="." unique_id=1060965475]
 wait_time = 0.6
 
+[node name="SuperpowerTimer" type="Timer" parent="." unique_id=11327339]
+wait_time = 3.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1339024063]
+root_node = NodePath("../Pivot")
+libraries/ = SubResource("AnimationLibrary_g1dw6")
+autoplay = &"spin"
+
 [connection signal="timeout" from="Pivot/DamageBlinkTimer" to="." method="_on_damage_blink_timer_timeout"]
 [connection signal="timeout" from="Pivot/BlinkIntervalTimer" to="." method="_on_blink_interval_timer_timeout"]
 [connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]
 [connection signal="timeout" from="CollisionTimer" to="." method="_on_collision_timer_timeout"]
+[connection signal="timeout" from="SuperpowerTimer" to="." method="_on_superpower_timer_timeout"]

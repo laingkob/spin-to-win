@@ -71,11 +71,10 @@ script = ExtResource("1_ljbto")
 mob_scene = ExtResource("2_dydw2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2044904725]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 9, 1)
+transform = Transform3D(1, 0, 0, 0, 0.8660253, 0.50000024, 0, -0.50000024, 0.8660253, 0, 9, -16)
 shadow_enabled = true
 
 [node name="Walls" type="Node3D" parent="." unique_id=1719707235]
-visible = false
 
 [node name="Top" type="StaticBody3D" parent="Walls" unique_id=1747557376]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1428223, -17.6)
@@ -139,7 +138,7 @@ mesh = SubResource("BoxMesh_li0jx")
 [node name="Player" parent="." unique_id=523184643 instance=ExtResource("3_fdpsk")]
 
 [node name="CameraPivot" type="Marker3D" parent="." unique_id=450027498]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 22, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 25, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=783025534]
 fov = 81.8
@@ -170,7 +169,7 @@ mesh = SubResource("CylinderMesh_jp6ov")
 curve = SubResource("Curve3D_leqef")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath" unique_id=80408842]
-transform = Transform3D(0.006771783, 0, 0.9999706, 0, 1, 0, -0.9999706, 0, 0.006771783, 21.0188, 0, 5.05841)
+transform = Transform3D(0.0067717815, 0, 0.9999704, 0, 1, 0, -0.9999704, 0, 0.0067717815, 21.0188, 0, 5.05841)
 
 [node name="MobTimer" type="Timer" parent="." unique_id=430251934]
 wait_time = 0.5

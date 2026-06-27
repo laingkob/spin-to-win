@@ -21,7 +21,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("beyblade2:position")
+tracks/0/path = NodePath("beyblade:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -33,7 +33,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("beyblade2:rotation")
+tracks/1/path = NodePath("beyblade:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -45,7 +45,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("beyblade2:scale")
+tracks/2/path = NodePath("beyblade:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -73,7 +73,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("beyblade2:position")
+tracks/0/path = NodePath("beyblade:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -85,7 +85,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("beyblade2:rotation")
+tracks/1/path = NodePath("beyblade:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -97,7 +97,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("beyblade2:scale")
+tracks/2/path = NodePath("beyblade:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -138,7 +138,7 @@ script = ExtResource("1_fjcxs")
 
 [node name="Pivot" type="Node3D" parent="." unique_id=1260192274]
 
-[node name="beyblade2" parent="Pivot" unique_id=223040962 instance=ExtResource("2_qftf6")]
+[node name="beyblade" parent="Pivot" unique_id=223040962 instance=ExtResource("2_qftf6")]
 transform = Transform3D(1, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, 0, 0, 0)
 
 [node name="damaged_beyblade" parent="Pivot" unique_id=2009153742 instance=ExtResource("3_qftf6")]
