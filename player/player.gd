@@ -12,7 +12,6 @@ var fall_acceleration = 10
 @export var health = 60
 
 var temporary_invincibility = false
-var lock_controls = false
 var superpower_on = false
 
 var mass = 4
@@ -33,14 +32,9 @@ func _physics_process(delta):
 	
 	if is_on_wall():
 		bounce_away(get_wall_normal())
-	
 	if not is_on_floor():
-		velocity.y = velocity.y - (fall_acceleration * delta)
-	
-	if lock_controls:
-		move_and_slide()
-		return
-	
+		target_velocity.y = -1 * fall_acceleration * delta
+
 	var direction = Vector3.ZERO
 	
 	if Input.is_action_pressed("move_left"):
@@ -51,13 +45,14 @@ func _physics_process(delta):
 		direction.z += 1
 	if Input.is_action_pressed("move_back"):
 		direction.z -= 1
-	
+		
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		$Pivot.basis = Basis.looking_at(direction)
 		
 		target_velocity.x = direction.x * speed
 		target_velocity.z = direction.z * speed
+
 	$AnimationPlayer.speed_scale = rotation_speed/2
 
 	for i in range(get_slide_collision_count()):
@@ -114,10 +109,6 @@ func _on_blink_interval_timer_timeout() -> void:
 	else :
 		$Pivot/beyblade.show()
 		$Pivot/damaged_beyblade.hide()
-
-
-func _on_collision_timer_timeout() -> void:
-	lock_controls = false
 
 
 func _on_superpower_timer_timeout() -> void:
