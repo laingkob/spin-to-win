@@ -161,10 +161,6 @@ shape = SubResource("CylinderShape3D_xf6sg")
 [node name="CollisionTimer" type="Timer" parent="." unique_id=1060965475]
 wait_time = 0.6
 
-[node name="SuperpowerTimer" type="Timer" parent="." unique_id=11327339]
-wait_time = 3.0
-one_shot = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1339024063]
 root_node = NodePath("../Pivot")
 libraries/ = SubResource("AnimationLibrary_g1dw6")
@@ -174,4 +170,3 @@ autoplay = &"spin"
 [connection signal="timeout" from="Pivot/BlinkIntervalTimer" to="." method="_on_blink_interval_timer_timeout"]
 [connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]
 [connection signal="timeout" from="CollisionTimer" to="." method="_on_collision_timer_timeout"]
-[connection signal="timeout" from="SuperpowerTimer" to="." method="_on_superpower_timer_timeout"]

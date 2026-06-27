@@ -53,10 +53,9 @@ func take_damage(damage_amount):
 	#print_debug("Mob took %d damage" %damage_amount)
 	health_bar.value -= damage_amount
 	if health_bar.value <= 0 && dead == false:
-		$AnimationPlayer.stop()
-		$AnimationPlayer.clear_queue()
-		$AnimationPlayer.play("death")
 		dead = true
+		$AnimationPlayer.stop()
+		$AnimationPlayer.play("death")
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

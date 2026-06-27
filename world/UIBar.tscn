@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://c6lnfp42ld5qj"]
+
+[ext_resource type="Script" uid="uid://cra5ot0d8qa75" path="res://world/player_health.gd" id="1_cm0gx"]
+
+[sub_resource type="Theme" id="Theme_yjixv"]
+resource_local_to_scene = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g0e3n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmo1i"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gu74f"]
+bg_color = Color(0, 0.7, 0.116666555, 1)
+
+[node name="Health" type="Control" unique_id=1024257813]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_yjixv")
+
+[node name="PlayerHealth" type="ProgressBar" parent="." unique_id=739103989]
+material = SubResource("CanvasItemMaterial_g0e3n")
+layout_mode = 0
+offset_left = 496.0
+offset_top = 12.0
+offset_right = 630.0
+offset_bottom = 31.0
+theme_override_styles/background = SubResource("StyleBoxFlat_cmo1i")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gu74f")
+max_value = 200.0
+step = 1.0
+value = 200.0
+fill_mode = 1
+show_percentage = false
+script = ExtResource("1_cm0gx")
+
+[node name="Label" type="Label" parent="PlayerHealth" unique_id=198269291]
+layout_mode = 0
+offset_left = 109.0
+offset_top = -3.0
+offset_right = 149.0
+offset_bottom = 28.0
+text = "HP"

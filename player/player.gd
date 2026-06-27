@@ -19,6 +19,7 @@ var mass = 4
 
 signal hit
 signal died
+signal used_power
 
 var target_velocity = Vector3.ZERO
 var rotation_speed = spin_speed
@@ -28,7 +29,7 @@ func _physics_process(delta):
 		superpower_on = true
 		rotation_speed = max_rotation_speed
 		transform = transform.scaled_local(Vector3(2,2,2))
-		$SuperpowerTimer.start()
+		used_power.emit()
 	
 	if is_on_wall():
 		bounce_away(get_wall_normal())

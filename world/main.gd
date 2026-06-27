@@ -9,8 +9,10 @@ signal shake
 func _ready():
 	$UserInterface/Retry.hide()
 	$UserInterface/Victory.hide() 
-	$Player.hit.connect($UserInterface/PlayerHealth._on_player_hit.bind())
+	$Player.hit.connect($UserInterface/Health/PlayerHealth._on_player_hit.bind())
 	$Player.died.connect(_on_player_died.bind())
+	$Player.used_power.connect($UserInterface/Powerup2/Powerup.drain.bind())
+	$UserInterface/Powerup2/Powerup.superpower_timeout.connect($Player._on_superpower_timer_timeout.bind())
 	shake.connect($CameraPivot/Camera3D._shake_camera.bind())
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
