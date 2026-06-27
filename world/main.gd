@@ -51,9 +51,8 @@ func _on_player_died():
 	$UserInterface/Retry.show()
   
 func victory():
-	
 	$UserInterface/Victory.show()
-		 
+ 
 func _unhandled_input(event):
 	if (event.is_action_pressed("enter")) and ($UserInterface/Retry.visible or $UserInterface/Victory.visible):
 		get_tree().reload_current_scene()

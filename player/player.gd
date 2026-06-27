@@ -11,6 +11,7 @@ var max_rotation_speed = 6
 @export var health_bar = 200
 
 var temporary_invincibility = false
+var lock_controls = false
 
 var mass = 4
 
@@ -18,9 +19,13 @@ signal hit
 signal died
 
 var target_velocity = Vector3.ZERO
-var rotation_speed = 0
+var rotation_speed = spin_speed
 
 func _physics_process(delta):
+	if lock_controls:
+		move_and_slide()
+		return
+	
 	var direction = Vector3.ZERO
 	
 	if Input.is_action_pressed("move_left"):
@@ -54,10 +59,14 @@ func _physics_process(delta):
 			continue
 		if collision.get_collider().is_in_group("mob"):
 			var mob = collision.get_collider()
-			if (mob.rotation_speed > rotation_speed):
-				take_damage(mob.rotation_speed)
-			else:
-				mob.take_damage(rotation_speed)
+			if (rotation_speed && mob.rotation_speed):
+				var damage_amount = rotation_speed - mob.rotation_speed
+				if (damage_amount < 0):
+					take_damage(-damage_amount)
+					bounce_off(mob)
+				else:
+					mob.take_damage(damage_amount)
+					mob.bounce_away(position)
 	
 	velocity = target_velocity
 	move_and_slide()
@@ -65,8 +74,7 @@ func _physics_process(delta):
 func take_damage(damage_amount):
 	if not temporary_invincibility:
 		#print_debug("Player took %d damage" % damage_amount)
-		health_bar -= damage_amount 
-
+		health_bar -= damage_amount
 		$Pivot/DamageBlinkTimer.start()
 		$Pivot/BlinkIntervalTimer.start()
 		temporary_invincibility = true
@@ -75,12 +83,13 @@ func take_damage(damage_amount):
 			die()
 
 func bounce_off(mob):
+	lock_controls = true
+	$CollisionTimer.start()
 	var nx = mob.velocity.y*velocity.z - mob.velocity.z*velocity.y
 	var ny = mob.velocity.z*velocity.x - mob.velocity.x*velocity.z
 	var nz = mob.velocity.x*velocity.y - mob.velocity.y*velocity.x
 	var normal = Vector3(nx, ny, nz)
-	velocity = normal
-	# TODO need to double check how to re scale this vector if necessary
+	velocity = normal * speed
 
 func die():
 	died.emit()
@@ -102,3 +111,7 @@ func _on_blink_interval_timer_timeout() -> void:
 	else :
 		$Pivot/beyblade.show()
 		$Pivot/damaged_beyblade.hide()
+
+
+func _on_collision_timer_timeout() -> void:
+	lock_controls = false

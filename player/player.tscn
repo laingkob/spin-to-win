@@ -42,6 +42,10 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3023608, 0)
 shape = SubResource("CylinderShape3D_xf6sg")
 
+[node name="CollisionTimer" type="Timer" parent="." unique_id=1060965475]
+wait_time = 0.6
+
 [connection signal="timeout" from="Pivot/DamageBlinkTimer" to="." method="_on_damage_blink_timer_timeout"]
 [connection signal="timeout" from="Pivot/BlinkIntervalTimer" to="." method="_on_blink_interval_timer_timeout"]
 [connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]
+[connection signal="timeout" from="CollisionTimer" to="." method="_on_collision_timer_timeout"]
