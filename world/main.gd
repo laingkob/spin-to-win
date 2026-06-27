@@ -9,7 +9,7 @@ signal shake
 func _ready():
 	$UserInterface/Retry.hide()
 	$UserInterface/Victory.hide() 
-	$Player.hit.connect($UserInterface/Health/PlayerHealth._on_player_hit.bind())
+	$Player.hit.connect(_on_player_hit.bind())
 	$Player.died.connect(_on_player_died.bind())
 	$Player.used_power.connect($UserInterface/Powerup2/Powerup.drain.bind())
 	$UserInterface/Powerup2/Powerup.superpower_timeout.connect($Player._on_superpower_timer_timeout.bind())
@@ -51,6 +51,9 @@ func _collision():
 func _on_player_died():
 	$MobTimer.stop()
 	$UserInterface/Retry.show()
+	
+func _on_player_hit():
+	$UserInterface/Health/PlayerHealth._on_player_hit($Player.health)
   
 func victory():
 	$UserInterface/Victory.show()

@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @export var min_speed: int = 5
 @export var max_speed: int = 11
-@export var rotation_speed = 2
+@export var rotation_speed = 5
 var fall_acceleration = 10
 
 var damage_buffer_frames = 5
@@ -12,7 +12,6 @@ var invincible_frames = 0
 
 var is_rotating : bool = true
 signal squashed
-var dead = false
 signal collide
 
 func _physics_process(_delta):
@@ -23,13 +22,10 @@ func _physics_process(_delta):
 	
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
-		
 		if collision.get_collider() == null:
 			continue
-		var other_mob = collision.get_collider()
 		if collision.get_collider().is_in_group("mob"):
-			bounce_away(other_mob.position)
-			other_mob.bounce_away(position)
+			bounce_away(collision.get_collider().position)
 	move_and_slide()
 
 
@@ -39,7 +35,6 @@ func initialize(start_position: Vector3, target_position: Vector3):
 	var random_speed = randi_range(min_speed, max_speed)
 	velocity = Vector3.FORWARD * random_speed
 	velocity = velocity.rotated(Vector3.UP, rotation.y)
-	$AnimationPlayer.play("spin")
 
 
 func take_damage(damage_amount):
@@ -49,13 +44,12 @@ func take_damage(damage_amount):
 	else :
 		invincible_frames = damage_buffer_frames
 	collide.emit()
-	$HealthBar.visible = true
-	#print_debug("Mob took %d damage" %damage_amount)
+	$HealthBar.show()
 	health_bar.value -= damage_amount
-	if health_bar.value <= 0 && dead == false:
-		dead = true
-		$AnimationPlayer.stop()
-		$AnimationPlayer.play("death")
+	
+	if health_bar.value <= 0:
+		if $AnimationPlayer.current_animation != "death":
+			$AnimationPlayer.play("death")
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

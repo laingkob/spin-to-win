@@ -76,6 +76,7 @@ stream_3/stream = ExtResource("11_vid1e")
 [node name="Main" type="Node3D" unique_id=263054531]
 script = ExtResource("1_ljbto")
 mob_scene = ExtResource("2_dydw2")
+metadata/_edit_horizontal_guides_ = [12.0, 31.0]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2044904725]
 transform = Transform3D(1, 0, 0, 0, 0.8660253, 0.50000024, 0, -0.50000024, 0.8660253, 0, 9, -16)
@@ -177,7 +178,7 @@ mesh = SubResource("CylinderMesh_jp6ov")
 curve = SubResource("Curve3D_leqef")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath" unique_id=80408842]
-transform = Transform3D(0.0067717736, 0, 0.99996924, 0, 1, 0, -0.99996924, 0, 0.0067717736, 21.0188, 0, 5.05841)
+transform = Transform3D(0.0067717647, 0, 0.9999679, 0, 1, 0, -0.9999679, 0, 0.0067717647, 21.0188, 0, 5.05841)
 
 [node name="MobTimer" type="Timer" parent="." unique_id=430251934]
 wait_time = 0.5
@@ -232,6 +233,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.47843137, 0.8235294, 0.14117648, 0.5019608)
@@ -289,6 +294,10 @@ text = "Press shift to boost"
 
 [node name="Health" parent="UserInterface" unique_id=1024257813 instance=ExtResource("8_tp5tb")]
 layout_mode = 0
+offset_left = 552.0
+offset_top = 12.0
+offset_right = 687.0
+offset_bottom = 32.0
 theme = SubResource("Theme_vid1e")
 
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=765363225]

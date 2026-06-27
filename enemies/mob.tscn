@@ -175,6 +175,7 @@ show_percentage = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1016091953]
 root_node = NodePath("../Pivot")
+root_motion_local = true
 libraries/ = SubResource("AnimationLibrary_gceo1")
 autoplay = &"spin"
 

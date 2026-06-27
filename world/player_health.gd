@@ -10,5 +10,5 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
-func _on_player_hit():
-	value = $"../../Player".health_bar
+func _on_player_hit(health):
+	value = health

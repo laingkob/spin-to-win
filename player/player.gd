@@ -1,15 +1,15 @@
 extends CharacterBody3D
 
 # Player speed in m/s
-@export var speed = 14
+@export var speed = 10
 
 @export var spin_speed = 2
-var max_rotation_speed = 6
+var max_rotation_speed = 11
 var fall_acceleration = 10
 
 @export var bounce_impulse = 16
 
-@export var health_bar = 200
+@export var health = 60
 
 var temporary_invincibility = false
 var lock_controls = false
@@ -81,12 +81,12 @@ func _physics_process(delta):
 func take_damage(damage_amount):
 	if not temporary_invincibility:
 		#print_debug("Player took %d damage" % damage_amount)
-		health_bar -= damage_amount
+		health -= damage_amount
 		$Pivot/DamageBlinkTimer.start()
 		$Pivot/BlinkIntervalTimer.start()
 		temporary_invincibility = true
 		hit.emit()
-		if health_bar <= 0:
+		if health <= 0:
 			die()
 
 func bounce_away(from_position: Vector3):
