@@ -170,8 +170,11 @@ root_node = NodePath("../Pivot")
 libraries/ = SubResource("AnimationLibrary_g1dw6")
 autoplay = &"spin"
 
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=1683623478]
+
 [connection signal="timeout" from="Pivot/DamageBlinkTimer" to="." method="_on_damage_blink_timer_timeout"]
 [connection signal="timeout" from="Pivot/BlinkIntervalTimer" to="." method="_on_blink_interval_timer_timeout"]
 [connection signal="body_entered" from="MobDetector" to="." method="_on_mob_detector_body_entered"]
 [connection signal="timeout" from="CollisionTimer" to="." method="_on_collision_timer_timeout"]
 [connection signal="timeout" from="SuperpowerTimer" to="." method="_on_superpower_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

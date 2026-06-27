@@ -20,10 +20,13 @@ var mass = 4
 
 signal hit
 signal died
-
+var initial_position : Vector3
 var target_velocity = Vector3.ZERO
 var rotation_speed = spin_speed
 
+func _ready()->void:
+	initial_position=position
+	
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y = velocity.y - (fall_acceleration * delta)
@@ -127,3 +130,7 @@ func _on_superpower_timer_timeout() -> void:
 	transform = power_down
 	superpower_on = false
 	rotation_speed = spin_speed
+
+
+func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
+	position = initial_position
