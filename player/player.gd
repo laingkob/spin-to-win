@@ -5,6 +5,7 @@ extends CharacterBody3D
 
 @export var spin_speed = 2
 var max_rotation_speed = 6
+var fall_acceleration = 10
 
 @export var bounce_impulse = 16
 
@@ -22,6 +23,10 @@ var target_velocity = Vector3.ZERO
 var rotation_speed = spin_speed
 
 func _physics_process(delta):
+	if not is_on_floor():
+		print_debug("flying")
+		velocity.y = velocity.y - (fall_acceleration * delta)
+	
 	if lock_controls:
 		move_and_slide()
 		return
