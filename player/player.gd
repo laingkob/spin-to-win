@@ -14,7 +14,6 @@ var fall_acceleration = 10
 var temporary_invincibility = false
 var lock_controls = false
 var superpower_on = false
-@onready var initial_transform = transform
 
 var mass = 4
 
@@ -25,6 +24,15 @@ var target_velocity = Vector3.ZERO
 var rotation_speed = spin_speed
 
 func _physics_process(delta):
+	if not superpower_on and Input.is_action_pressed("spin"):
+		superpower_on = true
+		rotation_speed = max_rotation_speed
+		transform = transform.scaled_local(Vector3(2,2,2))
+		$SuperpowerTimer.start()
+	
+	if is_on_wall():
+		bounce_away(get_wall_normal())
+	
 	if not is_on_floor():
 		velocity.y = velocity.y - (fall_acceleration * delta)
 	
@@ -43,18 +51,12 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_back"):
 		direction.z -= 1
 	
-	if not superpower_on and Input.is_action_pressed("spin"):
-		superpower_on = true
-		rotation_speed = max_rotation_speed
-		transform = transform.scaled(Vector3(1.5,1.5,1.5))
-		$SuperpowerTimer.start()
-	
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		$Pivot.basis = Basis.looking_at(direction)
-	
-	target_velocity.x = direction.x * speed
-	target_velocity.z = direction.z * speed
+		
+		target_velocity.x = direction.x * speed
+		target_velocity.z = direction.z * speed
 	$AnimationPlayer.speed_scale = rotation_speed/2
 
 	for i in range(get_slide_collision_count()):
@@ -67,7 +69,7 @@ func _physics_process(delta):
 				var damage_amount = rotation_speed - mob.rotation_speed
 				if (damage_amount < 0):
 					take_damage(-damage_amount)
-					bounce_off(mob)
+					bounce_away(mob.position)
 				else:
 					mob.take_damage(damage_amount)
 					mob.bounce_away(position)
@@ -86,21 +88,17 @@ func take_damage(damage_amount):
 		if health_bar <= 0:
 			die()
 
-func bounce_off(mob):
-	lock_controls = true
-	$CollisionTimer.start()
-	var nx = mob.velocity.y*velocity.z - mob.velocity.z*velocity.y
-	var ny = mob.velocity.z*velocity.x - mob.velocity.x*velocity.z
-	var nz = mob.velocity.x*velocity.y - mob.velocity.y*velocity.x
-	var normal = Vector3(nx, ny, nz)
-	velocity = normal * speed
+func bounce_away(from_position: Vector3):
+	look_at(from_position)
+	velocity = Vector3.BACK * speed
+	velocity = velocity.rotated(Vector3.UP, rotation.y)
 
 func die():
 	died.emit()
 	queue_free()
-
-func _on_mob_detector_body_entered(_body):
-	take_damage(1)
+#
+#func _on_mob_detector_body_entered(_body):
+	#take_damage(1)
 
 func _on_damage_blink_timer_timeout() -> void:
 	$Pivot/BlinkIntervalTimer.stop()
@@ -122,8 +120,6 @@ func _on_collision_timer_timeout() -> void:
 
 
 func _on_superpower_timer_timeout() -> void:
-	var power_down = initial_transform
-	power_down.origin = position
-	transform = power_down
+	transform = transform.scaled_local(Vector3(0.5, 0.5, 0.5))
 	superpower_on = false
 	rotation_speed = spin_speed

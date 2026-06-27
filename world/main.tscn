@@ -75,6 +75,7 @@ transform = Transform3D(1, 0, 0, 0, 0.8660253, 0.50000024, 0, -0.50000024, 0.866
 shadow_enabled = true
 
 [node name="Walls" type="Node3D" parent="." unique_id=1719707235]
+visible = false
 
 [node name="Top" type="StaticBody3D" parent="Walls" unique_id=1747557376]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1428223, -17.6)

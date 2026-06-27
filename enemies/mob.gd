@@ -54,6 +54,7 @@ func take_damage(damage_amount):
 	health_bar.value -= damage_amount
 	if health_bar.value <= 0 && dead == false:
 		$AnimationPlayer.stop()
+		$AnimationPlayer.clear_queue()
 		$AnimationPlayer.play("death")
 		dead = true
 
@@ -68,8 +69,8 @@ func squash():
 	queue_free()
 
 
-func bounce_away(position: Vector3):
-	look_at(position)
+func bounce_away(from_position: Vector3):
+	look_at(from_position)
 	var random_speed = randi_range(min_speed, max_speed)
 	velocity = Vector3.BACK * random_speed
 	velocity = velocity.rotated(Vector3.UP, rotation.y)
