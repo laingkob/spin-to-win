@@ -88,8 +88,8 @@ _data = {
 &"death": SubResource("Animation_qftf6")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hgucc"]
-size = Vector3(2.2, 0.8, 3)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_m3fjm"]
+radius = 1.9
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8lk34"]
 viewport_path = NodePath("SubViewport")
@@ -98,7 +98,7 @@ viewport_path = NodePath("SubViewport")
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj7fc"]
-bg_color = Color(0.01999998, 0.6, 0, 1)
+bg_color = Color(0.77, 0, 0.025666641, 1)
 
 [node name="Mob" type="CharacterBody3D" unique_id=934339240 groups=["mob"]]
 collision_layer = 2
@@ -115,8 +115,8 @@ root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_gceo1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=175542416]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0.25)
-shape = SubResource("BoxShape3D_hgucc")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06227374, 0.9990821, 0.051677227)
+shape = SubResource("CylinderShape3D_m3fjm")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=373594999]
 aabb = AABB(-0.579785, -0.551465, -0.504896, 1.1, 1.1, 1.043)
@@ -138,6 +138,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_vj7fc")
 max_value = 10.0
 step = 1.0
 value = 10.0
+fill_mode = 1
 show_percentage = false
 
 [connection signal="animation_finished" from="Pivot/beyblade2/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

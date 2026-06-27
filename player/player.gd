@@ -4,11 +4,7 @@ extends CharacterBody3D
 @export var speed = 14
 
 @export var spin_speed = 2
-
-# Downward acceleration when in the air
-@export var fall_acceleration = 75
-
-@export var jump_impulse = 20
+var max_rotation_speed = 6
 
 @export var bounce_impulse = 16
 
@@ -36,7 +32,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_back"):
 		direction.z -= 1
 	
-	if Input.is_action_pressed("spin"):
+	if Input.is_action_pressed("spin") && rotation_speed < max_rotation_speed:
 		rotation_speed += spin_speed
 	
 	if direction != Vector3.ZERO:
@@ -51,9 +47,6 @@ func _physics_process(delta):
 		$Pivot/beyblade.rotate(Vector3(0, 1, 0), rotation_amount)
 		rotation_speed -= 1
 		
-	if not is_on_floor():
-		target_velocity.y = target_velocity.y - (fall_acceleration * delta)
-
 	
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
@@ -65,12 +58,7 @@ func _physics_process(delta):
 				take_damage(mob.rotation_speed)
 			else:
 				mob.take_damage(rotation_speed)
-			##Check that we are on top of it
-			#if Vector3.UP.dot(collision.get_normal()) > 0.1:
-				#mob.squash()
-				#target_velocity.y = bounce_impulse
-				#break
-
+	
 	velocity = target_velocity
 	move_and_slide()
 

@@ -8,8 +8,7 @@
 radius = 0.4
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xf6sg"]
-height = 0.2
-radius = 1.1
+radius = 1.9
 
 [node name="Player" type="CharacterBody3D" unique_id=523184643]
 collision_mask = 7
@@ -40,7 +39,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MobDetector" unique_id=1140756960]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.174968, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3023608, 0)
 shape = SubResource("CylinderShape3D_xf6sg")
 
 [connection signal="timeout" from="Pivot/DamageBlinkTimer" to="." method="_on_damage_blink_timer_timeout"]
